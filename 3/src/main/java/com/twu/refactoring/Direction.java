@@ -1,5 +1,8 @@
 package com.twu.refactoring;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Direction {
     private final char direction;
 
@@ -8,33 +11,27 @@ public class Direction {
     }
 
     public Direction turnRight() {
-        switch (direction) {
-            case 'N':
-                return new Direction('E');
-            case 'S':
-                return new Direction('W');
-            case 'E':
-                return new Direction('N');
-            case 'W':
-                return new Direction('S');
-            default:
-                throw new IllegalArgumentException();
+        Map<Character, Character> turnR = new HashMap<>();
+        turnR.put('N', 'E');
+        turnR.put('S', 'W');
+        turnR.put('E', 'N');
+        turnR.put('W', 'S');
+        if (turnR.containsKey(direction)) {
+            return new Direction(turnR.get(direction));
         }
+        throw new IllegalArgumentException();
     }
 
     public Direction turnLeft() {
-        switch (direction) {
-            case 'N':
-                return new Direction('W');
-            case 'S':
-                return new Direction('E');
-            case 'E':
-                return new Direction('N');
-            case 'W':
-                return new Direction('S');
-            default:
-                throw new IllegalArgumentException();
+        Map<Character, Character> turnL = new HashMap<>();
+        turnL.put('N', 'W');
+        turnL.put('S', 'E');
+        turnL.put('E', 'N');
+        turnL.put('W', 'S');
+        if (turnL.containsKey(direction)) {
+            return new Direction(turnL.get(direction));
         }
+        throw new IllegalArgumentException();
     }
 
     @Override
